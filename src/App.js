@@ -4,6 +4,7 @@ import './App.css';
 
 import EditRecord from './editRecord';
 import EditForm from './editForm';
+import DeleteRecord from './deleteRecord';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -112,18 +113,6 @@ class App extends Component {
     });
   }
 
-  deleteAlbum = (id) => {
-    console.log('delete', id);
-    fetch("https://vv2qx5zqb7.execute-api.us-east-1.amazonaws.com/Dev", {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },      
-      body: JSON.stringify({id: id})
-    });
-  }
-
   render() {
     const { records } = this.state;
     const { classes } = this.props;
@@ -152,9 +141,7 @@ class App extends Component {
         </CardActionArea>
         <CardActions className={classes.center}>
           <EditRecord records={records} value={value} getRecords={this.getRecords}/>
-          <Button onClick={() => this.deleteAlbum(value.id)} size="small" color="primary">
-            Delete
-          </Button>
+          <DeleteRecord id={value.id}/>
         </CardActions>
       </Card>
     );
