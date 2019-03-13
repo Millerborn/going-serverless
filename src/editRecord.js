@@ -1,22 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import DialogForm from './dialogForm';
 import Button from '@material-ui/core/Button';
 
 import EditForm from './editForm';
-
-const styles = theme => ({
-	root: {
-		flexGrow: 1,
-	},
-	rightIcon: {
-		marginLeft: theme.spacing.unit
-	},
-	grow: {
-		flexGrow: 1,
-	},
-});
 
 class EditRecord extends Component {
 
@@ -53,7 +39,7 @@ class EditRecord extends Component {
         });
     }
     
-    onSubmit = (event) => {
+    onSubmit = () => {
 
         const { id, record, album, artist, date, imageUrl } = this.state;
 
@@ -72,6 +58,7 @@ class EditRecord extends Component {
     }
 
 	handleClose = () => {
+
 		this.setState({
 			open: false,
                 id: '',
@@ -80,7 +67,8 @@ class EditRecord extends Component {
 				artist: '',
 				date: '',
 				imageUrl: ''
-		});
+        });
+        
 	}
 
 		render() {
@@ -92,13 +80,13 @@ class EditRecord extends Component {
 				</Button>
 				<DialogForm
 					open={open}
-					dialogTitle={'Edit Action Card'}
+					dialogTitle={'Edit Record'}
 					formId={'edit-action'}
 					formFields={
 						<EditForm
 							handleChange={this.handleChange}
 							newRecord={this.state}
-							editMode={false}
+							editMode={true}
 						/>
 					}
 					onSubmit={this.onSubmit}
@@ -109,8 +97,4 @@ class EditRecord extends Component {
   }
 }
 
-EditRecord.propTypes = {
-	classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(EditRecord);
+export default (EditRecord);

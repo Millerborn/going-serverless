@@ -3,6 +3,7 @@ import logo from './vinyl-logo.svg';
 import './App.css';
 
 import EditRecord from './editRecord';
+import EditForm from './editForm';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -43,6 +44,11 @@ const styles = {
     width: 'flex',
     height: 'flex',
   },
+  form: {
+    backgroundColor: 'white',
+    padding: 15,
+    margin: 40,
+  }
 };
 
 class App extends Component {
@@ -80,7 +86,8 @@ class App extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  onSubmit = (event) => {
+    event.preventDefault();
     console.log('state', this.state);
 
     const { records, record, album, artist, date, imageUrl } = this.state;
@@ -159,7 +166,16 @@ class App extends Component {
           <h3>Welcome to the Server-less Record Shop!</h3>
           <br></br>
           <h5>Add A Record</h5>
-        <form onSubmit={this.handleSubmit}>
+          <form className={classes.form} id="add-record" onSubmit={this.onSubmit}>
+              <EditForm
+                handleChange={this.handleChange}
+                newRecord={this.state}
+              />  
+              <Button type="submit">
+                Add Record
+              </Button>
+          </form> 
+          {/* <form onSubmit={this.handleSubmit}>
           <input
             required 
             type="text" 
@@ -201,7 +217,7 @@ class App extends Component {
           >
           </input>
           <button type="submit">Add Record</button>
-        </form>
+        </form> */}
         </div>
         <div className={classes.root}>
           <GridList cellHeight={360} cols={4} className={classes.gridList}>
